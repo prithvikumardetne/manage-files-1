@@ -1,0 +1,48 @@
+name: Global workflow to rule them manage files
+
+on:
+  push:
+      branches: [ main ] #or main
+
+jobs:
+
+  replicate_changes:
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v3
+        - name: Replicating global workflow
+          uses: derberg/manage-files-in-multiple-repositories@v2
+          with:
+            github_token: ${{ secrets.MANAGE_FILES_TOKEN }}
+            patterns_to_ignore: '.github/workflows/greetings.yml'
+            patterns_to_include: '.github/workflows'
+            repos_to_ignore: gitpractice,bashscripts,ansiblescripts,sonarqube-wiki,skills-hello-github-actions,Project_1,template-with-workflows,template-from-bashscripts,bashscripts-template,Final_Project,codespaces-jupyter,
+            exclude_private: true
+            exclude_forked: true
+            branches: main
+            #destination: 'gitpractice'
+            committer_username: prithvikumar.detne@gmail.com
+            committer_email: prithvikumar.detne@gmail.com
+            commit_message: "ci: update global workflows"
+#name: Automerge release bump PR
+
+#jobs:
+
+  automerge:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Automerging
+        uses: pascalgn/automerge-action@v0.7.5
+        #the actor that created pr
+        if: github.actor == 'github-username-that-owns-token-used-in-global-workflow'
+        env:
+          GITHUB_TOKEN: "${{ secrets.MANAGE_FILES_TOKEN }}"
+          GITHUB_LOGIN: prithvikumar.detne@gmail.com
+          MERGE_LABELS: ""
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "Editing manage-files yaml"
+          MERGE_RETRIES: "10"
+          MERGE_RETRY_SLEEP: "10000"
