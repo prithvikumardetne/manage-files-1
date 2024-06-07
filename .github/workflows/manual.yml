@@ -27,7 +27,7 @@ jobs:
       - name: Automerging
         uses: pascalgn/automerge-action@v0.7.5
         #the actor that created pr
-        if: github.actor == 'github-username-that-owns-token-used-in-global-workflow'
+        if: github.actor == 'prithvikumar.detne@gmail.com'
         env:
           GITHUB_TOKEN: "${{ secrets.MANAGE_FILES_TOKEN }}"
           GITHUB_LOGIN: prithvikumar.detne@gmail.com

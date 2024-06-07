@@ -1,4 +1,4 @@
-name: Global workflow to rule them all
+name: Snyk IAC Scanning - Multiple Repos
 
 on:
   push:
@@ -20,12 +20,12 @@ jobs:
             patterns_to_ignore: '.github/workflows/greetings.yml'
             patterns_to_include: '.github/workflows'
             #repos_to_ignore: 'bashscripts'
-            topics_to_include: replicated
+            topics_to_include: snyk-iac-scan
             exclude_private: true
             exclude_forked: true
             branches: main
             #destination: 'gitpractice'
             committer_username: prithvikumar.detne@gmail.com
             committer_email: prithvikumar.detne@gmail.com
-            commit_message: "Committing only for Topic repos"
+            commit_message: "Validating Auto Merge"
             bot_branch_name: true
